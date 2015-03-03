@@ -1,0 +1,1 @@
+exports.double = require('./double');

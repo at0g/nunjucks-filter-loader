@@ -1,0 +1,25 @@
+{
+  "name": "nunjucks-filter-loader",
+  "version": "0.0.1-dev",
+  "description": "Configures a nunjucks environment to dynamically load filters from one or more directories",
+  "main": "index.js",
+  "engines": {
+      "node" : ">=0.12.0.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Ben Daley <ben@fanboy.io> (http://fanboy.io)",
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/at0g/nunjucks-filter-loader.git"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^2.1.0",
+    "mocha": "^2.1.0"
+  },
+  "peerDependencies": {
+    "nunjucks": "1.x"
+  }
+}

@@ -62,6 +62,24 @@ describe('nunjucks filter loader', function(){
             fn({ paths: ['test/filters/1', 'test/filters/2'], env: this.env}, callback);
         });
 
+        it('should resolve relative paths to process.cwd()', function(done){
+            fn({ paths: 'test/filters/1', env: this.env}, function(err, mapped){
+                should.not.exist(err);
+                mapped.should.have.key('double').and.be.a.Function;
+                done();
+            });
+
+        });
+
+        it('should use absolute paths as-is', function(done){
+            fn({ paths: process.cwd() + '/test/filters/1', env: this.env}, function(err, mapped){
+                should.not.exist(err);
+                mapped.should.have.key('double').and.be.a.Function;
+                done();
+            });
+
+        });
+
     });
 
 

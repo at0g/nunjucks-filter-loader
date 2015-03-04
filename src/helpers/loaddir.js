@@ -15,7 +15,7 @@ exports.sync = function(dir, map, env){
 exports.async = function(dir, map, env, callback) {
     fs.readdir(dir, function(err, files){
         if(err){
-            callback(err);
+            return callback(err);
         }
         files
             .filter( fileFilter)

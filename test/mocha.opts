@@ -1,2 +1,5 @@
 --require chai
+--require ./test/common
 --reporter spec
+--recursive
+--bail

@@ -1,13 +1,14 @@
 {
   "name": "nunjucks-filter-loader",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Configures a nunjucks environment to dynamically load filters from one or more directories",
   "main": "src/index.js",
   "engines": {
     "node": ">=0.12.0.0"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "coverage": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- --ui bdd -R spec -t 5000"
   },
   "author": "Ben Daley <ben@fanboy.io> (http://fanboy.io)",
   "repository": {
@@ -21,6 +22,7 @@
   "license": "MIT",
   "devDependencies": {
     "chai": "^2.1.0",
+    "istanbul": "^0.3.7",
     "mocha": "^2.1.0",
     "sinon": "^1.12.2",
     "sinon-chai": "^2.7.0"

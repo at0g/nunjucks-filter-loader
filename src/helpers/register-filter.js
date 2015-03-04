@@ -6,7 +6,8 @@ module.exports = function(map, env) {
 
     return function(obj){
 
-        if(typeof( obj.value ) === 'function'){
+        var type = typeof( obj.value );
+        if( type === 'function'){
             if(map[obj.key]){
                 throwErr(obj.key);
             }
@@ -14,7 +15,7 @@ module.exports = function(map, env) {
             env.addFilter(obj.key, obj.value);
             map[obj.key] = obj.value;
         }
-        else if(typeof(obj.value) === 'object') {
+        else if( type === 'object') {
             var keys = Object.keys(obj.value);
 
             keys.forEach(function(key){
@@ -25,7 +26,13 @@ module.exports = function(map, env) {
                     env.addFilter(key, obj.value[key]);
                     map[key] = obj.value[key];
                 }
+                else {
+                    return false;
+                }
             })
+        }
+        else {
+            return;
         }
         
     };

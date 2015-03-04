@@ -38,4 +38,12 @@ describe('helpers/loaddir.js', function(){
         }.bind(this));
     });
 
+    it('should return an error in callback if dir does not exist', function(done){
+        var fakeDir = __dirname + '/not/a/real/path';
+        this.loaddir.async(fakeDir, this.map, this.env, function(err, map){
+            err.should.be.a.Error;
+            done();
+        });
+    });
+
 });

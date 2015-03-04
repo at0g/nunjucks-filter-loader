@@ -79,6 +79,24 @@ describe('helpers/register-filter.js', function(){
             }.bind(this)).should.throw('Filter [square] already exists');
         });
 
+        it('should ignore keys that are not functions', function(){
+            this.fn({
+                key: 'a-module',
+                value: {
+                    fn: function(){},
+                    notafunction: {}
+                }
+            });
+            this.map.should.have.keys('fn');
+        });
+
+    });
+
+    describe('register a number', function(){
+
+        it('should return nothing', function(){
+            should.not.exist( this.fn(1) );
+        })
     });
 
 });

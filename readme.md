@@ -38,7 +38,7 @@ filters.configure({
 
 ### sync vs async file operations
 
-If a callback function is provided as the second parameter to configure, then the file read operations will be made asynchronously.
+If a callback function is provided as the second parameter to configure, then file read operations will be made asynchronously.
 
 ```
 var filters = require('nunjucks-filter-loader');
@@ -58,8 +58,9 @@ filters.configure({...}, function(err, result){
 
 - `index.js` files are ignored, as are files without a .js extension
 - The directory lookup is not recursive
-- The name of the filter is derived from the filename by removing the __.js__ extension. 
-
+- The name of the filter is derived from the filename by removing the __.js__ extension.
+- An error is thrown if filenames collide (such as adding two paths that contain `foo.js`).
+- Relative directory paths are resolved to `process.cwd()`. Absolute paths are used verbatim.
 
 If a file exports an object instead of a function, the objects keys will be used instead.
 

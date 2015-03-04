@@ -36,6 +36,24 @@ filters.configure({
 
 ```
 
+### sync vs async file operations
+
+If a callback function is provided as the second parameter to configure, then the file read operations will be made asynchronously.
+
+```
+var filters = require('nunjucks-filter-loader');
+var result = filters.configure({...}); // sync method, returns the filter map to result 
+```
+
+```
+var filters = require('nunjucks-filter-loader');
+// Trigger async file loading by passing a second parameter after options
+filters.configure({...}, function(err, result){
+    // async method - filter map is passed as the second parameter to the callback
+});
+```
+
+
 # notes
 
 - `index.js` files are ignored, as are files without a .js extension

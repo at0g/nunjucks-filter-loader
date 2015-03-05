@@ -82,7 +82,9 @@ but `baz` will not (as it's a string)
 ## running tests
 
 `npm test` (or `mocha`) - Run all tests
+
 `mocha test/unit` - Run unit tests
+
 `mocha test/functional` - Run functional tests
 
 `npm run coverage` - Check code coverage with istanbul

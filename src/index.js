@@ -17,7 +17,7 @@ exports.configure = function(options){
 
     var callback = arguments.length > 1 ? arguments[1] : null;
     var env = options.env;
-    var map = {};
+    var results = {};
     var paths = Array.isArray(options.paths) ? options.paths : [options.paths];
 
 
@@ -26,10 +26,10 @@ exports.configure = function(options){
             if( !path.isAbsolute(dir) ) {
                 dir = path.resolve(process.cwd(), dir);
             }
-            helpers.loaddir.sync(dir, map, env);
+            helpers.loaddir.sync(dir, results, env);
         });
 
-        return map;
+        return results;
     } else {
 
         step(
@@ -40,7 +40,7 @@ exports.configure = function(options){
                     if( !path.isAbsolute(dir) ) {
                         dir = path.resolve(process.cwd(), dir);
                     }
-                    helpers.loaddir.async(dir, map, env, group());
+                    helpers.loaddir.async(dir, results, env, group());
                 });
             },
 
@@ -53,5 +53,5 @@ exports.configure = function(options){
     }
 
 
-    return map;
+    return results;
 };

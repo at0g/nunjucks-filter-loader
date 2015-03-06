@@ -3,16 +3,16 @@ var fileFilter = require('./file-filter');
 var fileMap = require('./file-map');
 var registerFilter = require('./register-filter');
 
-exports.sync = function(dir, map, env){
+exports.sync = function(dir, results, env){
     fs.readdirSync(dir)
         .filter( fileFilter )
         .map( fileMap(dir) )
-        .forEach( registerFilter(map, env) )
+        .forEach( registerFilter(results, env) )
     ;
-    return map;
+    return results;
 };
 
-exports.async = function(dir, map, env, callback) {
+exports.async = function(dir, results, env, callback) {
     fs.readdir(dir, function(err, files){
         if(err){
             return callback(err);
@@ -20,9 +20,9 @@ exports.async = function(dir, map, env, callback) {
         files
             .filter( fileFilter)
             .map( fileMap(dir) )
-            .forEach( registerFilter(map, env) )
+            .forEach( registerFilter(results, env) )
         ;
 
-        callback(err, map);
+        callback(err, results);
     });
 };

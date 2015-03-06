@@ -36,9 +36,37 @@ filters.configure({
 
 ```
 
+### options.mapping
+
+An optional mapping object can be passed to configure to allow per-filter configuration.
+Mapping allows you to perform a few tasks:
+
+- Mark a filter as being async: `{ myfiltername: { async: true} }`
+- Alias a filter to another name `{ markdown: { alias: 'md' }`
+- Alias a filter to multiple names `{ marked: { alias: ['markdown', 'md'] }`
+- Invoke a function with parameters to return the filter function `{ myfn: { apply: { scope: this, params: [1, 'two', ...] }`
+
+The mapping object takes the following form:
+```
+var filters = require('nunjucks-filter-loader');
+filters.configure({
+    env: nunjucksEnv,
+    paths: 'path/to/templates',
+    mapping: {
+        nameOfFilter: {
+            async: true || false,
+            alias: string || [string],
+            apply: { scope: object, params: [] }
+        }
+    }
+});
+```
+
+
 ### sync vs async file operations
 
-If a callback function is provided as the second parameter to configure, then file read operations will be made asynchronously.
+If a callback function is provided as the second parameter to configure, 
+then file read operations will be made asynchronously.
 
 ```
 var filters = require('nunjucks-filter-loader');

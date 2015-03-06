@@ -4,7 +4,7 @@
   "description": "Configures a nunjucks environment to dynamically load filters from one or more directories",
   "main": "src/index.js",
   "engines": {
-    "node": ">=0.12.0.0"
+    "node": ">=0.12.0"
   },
   "scripts": {
     "test": "mocha",

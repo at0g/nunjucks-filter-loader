@@ -19,14 +19,14 @@ exports.configure = function(options){
     var env = options.env;
     var results = {};
     var paths = Array.isArray(options.paths) ? options.paths : [options.paths];
-
+    var mapping = options.mapping || {};
 
     if (!callback) {
         paths.forEach(function(dir){
             if( !path.isAbsolute(dir) ) {
                 dir = path.resolve(process.cwd(), dir);
             }
-            helpers.loaddir.sync(dir, results, env);
+            helpers.loaddir.sync(dir, results, env, mapping);
         });
 
         return results;
@@ -40,7 +40,7 @@ exports.configure = function(options){
                     if( !path.isAbsolute(dir) ) {
                         dir = path.resolve(process.cwd(), dir);
                     }
-                    helpers.loaddir.async(dir, results, env, group());
+                    helpers.loaddir.async(dir, results, env, mapping, group());
                 });
             },
 

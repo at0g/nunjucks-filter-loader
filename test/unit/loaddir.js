@@ -5,7 +5,7 @@ describe('helpers/loaddir.js', function(){
     });
 
     beforeEach(function(){
-        this.map = {};
+        this.results = {};
         this.dir = process.cwd() + '/test/filters/1';
         this.addFilter = sinon.spy();
         this.env = {
@@ -22,17 +22,17 @@ describe('helpers/loaddir.js', function(){
     });
 
     it('should load files in dir synchronously', function(){
-        this.loaddir.sync(this.dir, this.map, this.env);
-        this.map.should.have.keys('double');
+        this.loaddir.sync(this.dir, this.results, this.env);
+        this.results.should.have.keys('double');
         this.addFilter.should.have.been.calledOnce;
     });
 
     it('should load file in dir asynchronously', function(done){
 
-        this.loaddir.async(this.dir, this.map, this.env, function(err, map){
+        this.loaddir.async(this.dir, this.results, this.env, function(err, results){
             should.not.exist(err);
-            map.should.equal(this.map);
-            map.should.have.keys('double');
+            results.should.equal(this.results);
+            results.should.have.keys('double');
             this.addFilter.should.have.been.calledOnce;
             done();
         }.bind(this));
@@ -40,7 +40,7 @@ describe('helpers/loaddir.js', function(){
 
     it('should return an error in callback if dir does not exist', function(done){
         var fakeDir = __dirname + '/not/a/real/path';
-        this.loaddir.async(fakeDir, this.map, this.env, function(err, map){
+        this.loaddir.async(fakeDir, this.results, this.env, function(err, results){
             err.should.be.a.Error;
             done();
         });

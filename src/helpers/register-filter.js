@@ -7,6 +7,9 @@ module.exports = function(results, env, mapping) {
     }
 
     function addFilter(key, value, async){
+        if(results.hasOwnProperty(key)){
+            throwErr(key);
+        }
 
         async = async || false;
         var fn = value;
@@ -46,10 +49,6 @@ module.exports = function(results, env, mapping) {
 
 
         if( type === 'function'){
-            if(results[key]){
-                throwErr(key);
-            }
-
             addFilter(key, value);
         }
         else if( type === 'object') {
@@ -57,9 +56,6 @@ module.exports = function(results, env, mapping) {
 
             keys.forEach(function(key){
                 if( typeof(value[key]) === 'function'){
-                    if(results[key]){
-                        throwErr(key);
-                    }
                     addFilter(key, value[key]);
                 }
                 else {

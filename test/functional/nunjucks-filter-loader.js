@@ -48,6 +48,19 @@ describe('nunjucks filter loader', function(){
             this.addFilter.should.have.been.calledThrice;
         });
 
+        it('should apply options.mapping', function(){
+            var results = fn({
+                paths: ['test/filters/1', 'test/filters/2'],
+                env: this.env,
+                mapping: {
+                    'double': { alias: 'times2' },
+                    'prepend': { async: true }                }
+            });
+
+            results.should.have.all.keys('double', 'square', 'prepend', 'times2');
+            this.addFilter.should.have.been.calledWithExactly('prepend', require('../filters/2/exports').prepend, true);
+        });
+
     });
 
     describe('loading files (async)', function(){
@@ -77,6 +90,23 @@ describe('nunjucks filter loader', function(){
                 results.should.have.key('double').and.be.a.Function;
                 done();
             });
+
+        });
+
+        it('should apply options.mapping', function(done){
+            fn({
+                paths: ['test/filters/1', 'test/filters/2'],
+                env: this.env,
+                mapping: {
+                    'double': { alias: 'times2' },
+                    'prepend': { async: true }                }
+            }, function(err, results){
+                should.not.exist(err);
+                results.should.have.all.keys('double', 'square', 'prepend', 'times2');
+                this.addFilter.should.have.been.calledWithExactly('prepend', require('../filters/2/exports').prepend, true);
+                done();
+            }.bind(this));
+
 
         });
 

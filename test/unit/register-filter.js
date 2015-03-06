@@ -5,8 +5,8 @@ describe('helpers/register-filter.js', function(){
     beforeEach(function(){
         this.addFilter = sinon.spy();
         this.env = { addFilter: this.addFilter };
-        this.map = {};
-        this.fn = factory(this.map, this.env);
+        this.results = {};
+        this.fn = factory(this.results, this.env);
     });
 
     it('should be a function', function(){
@@ -29,18 +29,20 @@ describe('helpers/register-filter.js', function(){
 
         it('should register double', function(){
             this.fn(this.double);
-            this.addFilter.should.have.been.calledWith('double', this.map.double);
+            this.addFilter.should.have.been.calledWith('double', this.results.double);
         });
 
-        it('should add double to this.map', function(){
+        it('should add double to this.results', function(){
             this.fn(this.double);
-            this.map.should.have.key('double');
-            this.map.double.should.equal(this.double.value);
+            this.results.should.have.key('double');
+            this.results.double.should.equal(this.double.value);
         });
+        
+        
 
         it('should throw an error when adding a duplicate filter name', function(){
             this.fn(this.double);
-            this.map.should.have.key('double');
+            this.results.should.have.key('double');
 
             (function(){
                 this.fn(this.double);
@@ -65,14 +67,14 @@ describe('helpers/register-filter.js', function(){
             this.addFilter.should.have.been.calledTwice;
         });
 
-        it('should add square and prepend to map', function(){
+        it('should add square and prepend to results', function(){
             this.fn(this.obj);
-            this.map.should.have.keys('square', 'prepend');
+            this.results.should.have.keys('square', 'prepend');
         });
 
         it('should throw an error when adding a duplicate filter name', function(){
             this.fn(this.obj);
-            this.map.should.have.keys('square', 'prepend');
+            this.results.should.have.keys('square', 'prepend');
 
             (function(){
                 this.fn(this.obj);
@@ -87,7 +89,7 @@ describe('helpers/register-filter.js', function(){
                     notafunction: {}
                 }
             });
-            this.map.should.have.keys('fn');
+            this.results.should.have.keys('fn');
         });
 
     });

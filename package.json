@@ -1,6 +1,6 @@
 {
   "name": "nunjucks-filter-loader",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "Configures a nunjucks environment to dynamically load filters from one or more directories",
   "main": "src/index.js",
   "engines": {
@@ -28,7 +28,7 @@
     "sinon-chai": "^2.7.0"
   },
   "peerDependencies": {
-    "nunjucks": "1.x"
+    "nunjucks": "^1.0.0 || ^2.0.0"
   },
   "dependencies": {
     "step": "0.0.5"
